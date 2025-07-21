@@ -1,0 +1,81 @@
+:root {
+    font-family: "Comic Relief", system-ui;
+
+}
+
+.head {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+body {
+    background: linear-gradient(160deg, rgb(108, 124, 204) 10%, rgb(119, 138, 230) 50%, rgb(237, 128, 150) 100%);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 96%;
+    margin: 0 auto;
+}
+
+.month {
+    background-color: #c0c3dd;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    padding: 10px;
+    min-height: 250px;
+}
+
+.month-name {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.days {
+    display: grid;
+    margin: 1fr;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    font-size: 12px;
+}
+
+.day {
+    background-color: #d4d7f1;
+    height: 30px;
+    border: 1px solid #a1a1a1;
+    text-align: center;
+    max-width: 1fr
+}
+
+.day.empty {
+    background-color: #a3a5bb;
+}
+
+button {
+    min-height: 20px;
+    max-width: 25px;
+    border: none;
+}
+
+button.left {
+    background-image: url("caret-left.svg");
+    background-size: contain;
+    background-color: rgb(108, 124, 204);
+
+}
+
+button.right {
+    background-color: #7385DC;
+    background-image: url("caret-left.svg");
+    transform: rotate(180deg);
+    background-size: contain;
+}
