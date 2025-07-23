@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import MonthView from './components/monthView.vue';
+import MonthView from './components/MonthView.vue';
 
 const today = new Date();
 const year = ref(2025);

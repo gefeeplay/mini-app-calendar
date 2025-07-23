@@ -110,3 +110,23 @@ button.right {
     transform: rotate(180deg);
     background-size: contain;
 }
+
+button.close {
+    background-image: url("../assets/caret-left.svg");
+    background-size: contain;
+    background-color: #c0c3dd;
+    margin-left: 1rem;
+}
+
+button.edit {
+    height: 20px;
+    width: 20px;
+    background-color: #d4d7f1;
+    background-image: url(../assets/pen.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    position: relative;
+    left: 85%;
+    top: 50%;
+}
