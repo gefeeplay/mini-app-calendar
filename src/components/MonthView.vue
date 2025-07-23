@@ -29,8 +29,12 @@
             </button>
             
             <!-- отображаем событие -->
-            <div v-if="getEvent(day.number)" class="event">
-                {{ getEvent(day.number) }}
+            <div v-if="day.number && getEvents(day.number).length" 
+            class="event" 
+            v-for="(ev, i) in getEvents(day.number)" 
+            :key="i"
+            >
+                {{ ev }}
             </div>
         </div>
             
@@ -41,6 +45,11 @@
         <!-- Модальное окно -->
         <dialog ref="eventDialog">
         <form @submit.prevent="saveEvent">
+            <h3>События {{ currentDay }} {{ monthNames[curMonth] }}</h3>
+            <div v-for="(ev, index) in getEvents(currentDay)" :key="index" class="event-modal">
+                <span>{{ ev }}</span>
+                <button type="button" @click="deleteEvent(index)">Удалить</button>
+            </div>
             <h3>Новое событие для {{ currentDay }} {{ monthNames[curMonth] }}</h3>
             <input
             v-model="eventText"
@@ -51,7 +60,6 @@
             <div class="edit-buttons">
                 <button type="submit" style="color: green;">Сохранить</button>
                 <button type="button" @click="closeDialog">Отмена</button>
-                <button v-if="getEvent(currentDay)" type="button" @click="deleteEvent" style="color: red;">Удалить</button>
             </div>
         </form>
         </dialog>
@@ -77,7 +85,7 @@
 
     function openDialog(day){
         currentDay.value = day;
-        eventText.value = getEvent(day) || '';
+        eventText.value = '';
         eventDialog.value.showModal();
     }
 
@@ -86,26 +94,43 @@
     }
 
     function saveEvent() {
-        const key = `${props.year}-${String(props.curMonth + 1).padStart(2, '0')}-${String(currentDay.value).padStart(2, '0')}`;
-        events.value[key] = eventText.value;
+        const key = formatDateKey(currentDay.value);
+        if (!events.value[key]) {
+            events.value[key] = [];
+        }
+        events.value[key].push(eventText.value);
+        eventText.value = '';
         closeDialog();
     }
 
-    function deleteEvent(){
-        const key = `${props.year}-${String(props.curMonth + 1).padStart(2, '0')}-${String(currentDay.value).padStart(2, '0')}`;
-        delete events.value[key];
-        closeDialog();
+    function deleteEvent(index) {
+    const key = formatDateKey(currentDay.value);
+        if (events.value[key]) {
+            events.value[key].splice(index, 1);
+            if (events.value[key].length === 0) {
+                delete events.value[key];
+            }
+        }
     }
 
-    function getEvent(day) {
-        const key = `${props.year}-${String(props.curMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        return events.value[key];
+    function getEvents(day) {
+        const key = formatDateKey(day);
+        return events.value[key] || [];
+    }
+
+    function formatDateKey(day) {
+        return `${props.year}-${String(props.curMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     }
 
 </script>
 
 
 <style scoped>
+
+h3{
+    text-align: center;
+}
+
 .month-view {
   min-height: 95%;
   padding: 16px;
@@ -155,12 +180,24 @@ dialog {
 
 .event {
   font-size: 11px;
-  margin-top: 2px;
   color: darkgreen;
   background: #e5ffe5;
   padding: 2px;
+  margin: 0px 5px 2px 25%;
   border-radius: 3px;
   word-break: break-word;
+  width: 50%;
+}
+
+.event-modal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #e5ffe5;
+    border-radius: 0.5rem;
+    margin-bottom: 4px;
+    padding: 0 5px 0 5px;
+    height: 2rem;
 }
 
 dialog::backdrop {
@@ -178,6 +215,13 @@ dialog::backdrop {
     height: 1.5rem;
     border-radius: 0.5rem;
     margin-top: 15px;
+}
+
+.event-modal button {
+    min-width: 30%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    color: red;
 }
 
 </style>
