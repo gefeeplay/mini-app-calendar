@@ -130,3 +130,30 @@ button.edit {
     left: 88%;
     top: 50%;
 }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px 20px;
+  background-color: rgba(221, 218, 218, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0003;
+  z-index: 9999;
+  min-width: 300px;
+}
+.toast ul {
+  margin: 8px 0 0;
+  padding-left: 10px;
+  
+}
+.toast button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
