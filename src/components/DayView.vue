@@ -1,5 +1,5 @@
 <template>
-    <dialog ref="eventDialog">
+    <dialog ref="DialogEL">
         <form @submit.prevent="saveEvent">
             <h3>События {{ currentDay }} {{ monthName }}</h3>
             <div v-for="(ev, index) in events" :key="index" class="event-modal">
@@ -15,7 +15,7 @@
             />
             <div class="edit-buttons">
                 <button type="submit" style="color: green;">Сохранить</button>
-                <button type="button" @click="close">Отмена</button>
+                <button type="button" @click="closeDialog">Отмена</button>
             </div>
         </form>
     </dialog>
@@ -32,15 +32,15 @@ const props = defineProps({
 const emit = defineEmits(['close', 'save', 'delete']);
 
 const eventText = ref('');
-const eventDialog = ref(null);
+const DialogEL = ref(null);
 
 function open() {
-    eventDialog.value.showModal();
+    DialogEL.value.showModal();
     eventText.value = '';
 }
 
-function close() {
-    eventDialog.value.close();
+function closeDialog() {
+    DialogEL.value?.close();
     emit('close');
 }
 
@@ -48,14 +48,14 @@ function saveEvent() {
     if (eventText.value.trim()) {
         emit('save', eventText.value);
     }
-    close();
+    closeDialog();
 }
 
 function deleteEvent(index) {
     emit('delete', index);
 }
 
-defineExpose({ open, close });
+defineExpose({ open, closeDialog });
 </script>
 
 <style scoped>
