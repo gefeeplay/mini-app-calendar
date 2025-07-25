@@ -17,6 +17,7 @@
             <div v-for="day in getMonthDays(curMonth, year)" :key="day.key" class="day" :class="{ empty: !day.number }">
                 {{ day.number || '' }}
                 <button v-if="day.number" class="edit" @click="openDialog(day.number)">
+                    <span class="material-symbols-outlined">edit_note</span>
                 </button>
 
                 <!-- отображаем событие -->

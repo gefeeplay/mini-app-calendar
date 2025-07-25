@@ -1,10 +1,12 @@
 <template>
     <dialog ref="DialogEL">
         <form @submit.prevent="saveEvent">
-            <h3>События {{ currentDay }} {{ monthName }}</h3>
+            <h3>События {{ day }} {{ monthName }}</h3>
             <div v-for="(ev, index) in events" :key="index" class="event-modal">
                 <span>{{ ev }}</span>
-                <button type="button" @click="deleteEvent(index)">Удалить</button>
+                <button type="button" @click="deleteEvent(index)">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
             </div>
             <h3>Новое событие</h3>
             <input
@@ -74,8 +76,8 @@ dialog {
     background: #e5ffe5;
     border-radius: 0.5rem;
     margin-bottom: 4px;
-    padding: 0 5px 0 5px;
-    height: 2rem;
+    padding: 0 10px;
+    height: 2.5rem;
 }
 
 dialog::backdrop {
@@ -90,15 +92,14 @@ dialog::backdrop {
 
 .edit-buttons button{
     min-width: 30%;
-    height: 1.5rem;
+    height: 1.8rem;
     border-radius: 0.5rem;
     margin-top: 15px;
 }
 
 .event-modal button {
-    min-width: 30%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-    color: red;
+    color: rgb(255, 0, 0);
+    background: none;
+    right: 5px;
 }
 </style>

@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root {
-    font-family: "Comic Relief", system-ui;
+    font-family: "Comfortaa", "Open Sans", sans-serif;
 
 }
 
@@ -69,7 +71,8 @@ body {
     height: 25px;
     border: 1px solid #a1a1a1;
     text-align: center;
-    max-width: 1fr
+    max-width: 1fr;
+    padding-top: 5px;
 }
 
 .day.empty {
@@ -119,10 +122,9 @@ button.close {
 }
 
 button.edit {
-    height: 20px;
-    width: 20px;
+    height: 24px;
+    width: 24px;
     background-color: #d4d7f1;
-    background-image: url(../assets/pen.svg);
     background-repeat: no-repeat;
     background-size: contain;
     display: flex;
@@ -132,28 +134,30 @@ button.edit {
 }
 
 .toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 20px 20px;
-  background-color: rgba(221, 218, 218, 0.9);
-  border-radius: 8px;
-  box-shadow: 0 0 10px #0003;
-  z-index: 9999;
-  min-width: 300px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px 20px;
+    background-color: rgba(221, 218, 218, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 10px #0003;
+    z-index: 9999;
+    min-width: 300px;
 }
+
 .toast ul {
-  margin: 8px 0 0;
-  padding-left: 10px;
-  
+    margin: 8px 0 0;
+    padding-left: 10px;
+
 }
+
 .toast button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
 }

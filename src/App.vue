@@ -1,5 +1,4 @@
 <template>
-
   <!-- Переключение между годом и месяцем -->
   <div class="calendar-wrapper">
     <MonthView v-if="curMonth !== null" :curMonth="curMonth" :year="year" :getMonthDays="getMonthDays"
@@ -36,46 +35,55 @@
           </div>
         </div>
       </div>
-
-      <!-- Уведомление -->
-      <div v-if="showToast" class="toast">
-        <strong>Сегодняшние события ({{ formatToday }}):</strong>
-        <ol>
-          <li v-for="(ev, i) in todayEvents" :formatToday="i">{{ ev }}</li>
-        </ol>
-        <button @click="showToast = false">✖</button>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, nextTick } from 'vue';
 import MonthView from './components/MonthView.vue';
+import { useToast } from 'vue-toastification';
+import Icon from './components/Icon.vue';
 
+const toast = useToast()
 
 const year = ref(2025);
 const curMonth = ref(null);
 
-const showToast = ref(false);
 const todayEvents = ref([]);
 const today = new Date();
 const formatToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick() // Ждём, пока всё отрисуется
+
   const saved = localStorage.getItem('calendar-events');
 
   if (saved) {
-    const events = JSON.parse(saved);
-    if (events[formatToday] && events[formatToday].length > 0) {
-      todayEvents.value = events[formatToday];
-      showToast.value = true;
+    try {
+      const events = JSON.parse(saved)
+      todayEvents.value = events[formatToday] || []
+
+      if (todayEvents.value.length > 0) {
+        const message = `Сегодня ${todayEvents.value.length} событие(й):\n` +
+          todayEvents.value.map(ev => `• ${ev}`).join('\n')
+
+        toast.info(message, {
+          position: 'bottom-right',
+          timeout: 5000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          hideProgressBar: false,
+          closeButton: 'button',
+          icon: Icon
+        })
+      }
+    } catch (e) {
+      console.error('Ошибка при разборе localStorage:', e)
     }
-
-    setTimeout(() => {
-      showToast.value = false;
-    }, 5000);
-
   }
 })
 

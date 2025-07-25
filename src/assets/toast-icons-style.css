@@ -1,0 +1,21 @@
+.custom-toast {
+  background-color: rgb(108, 124, 204) !important;
+  color: #fff !important;
+  border-left: 5px solid rgb(165, 172, 212);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.Vue-Toastification__icon {
+  width: auto !important;
+}
+
+.material-symbols {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  font-size: 36px;
+  color: white;
+}
