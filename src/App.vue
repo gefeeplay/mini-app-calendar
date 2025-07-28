@@ -1,4 +1,5 @@
 <template>
+  <GuidePopup />
   <!-- Переключение между годом и месяцем -->
   <div class="calendar-wrapper">
     <MonthView v-if="curMonth !== null" :curMonth="curMonth" :year="year" :getMonthDays="getMonthDays"
@@ -44,6 +45,7 @@ import { onMounted, ref, nextTick } from 'vue';
 import MonthView from './components/MonthView.vue';
 import { useToast } from 'vue-toastification';
 import Icon from './components/Icon.vue';
+import GuidePopup from './components/GuidePopup.vue';
 
 const toast = useToast()
 

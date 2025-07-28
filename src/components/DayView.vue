@@ -17,7 +17,7 @@
             />
             <div class="edit-buttons">
                 <button type="submit" style="color: green;">Сохранить</button>
-                <button type="button" @click="closeDialog">Отмена</button>
+                <button type="button" @click="closeDialog">Назад</button>
             </div>
         </form>
     </dialog>
@@ -50,7 +50,7 @@ function saveEvent() {
     if (eventText.value.trim()) {
         emit('save', eventText.value);
     }
-    closeDialog();
+    /*closeDialog();*/
 }
 
 function deleteEvent(index) {
