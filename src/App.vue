@@ -1,5 +1,5 @@
 <template>
-  <GuidePopup />
+  <GuidePopup ref="guideRef"/>
   <!-- Переключение между годом и месяцем -->
   <div class="calendar-wrapper">
     <MonthView v-if="curMonth !== null" :curMonth="curMonth" :year="year" :getMonthDays="getMonthDays"
@@ -9,10 +9,12 @@
       <div class="head">
         <div>
           <button class="left" @click="decreaseYear"></button>
+          <button class="right" @click="increaseYear"></button>
         </div>
         <div>Календарь {{ year }} года</div>
         <div>
-          <button class="right" @click="increaseYear"></button>
+          <button class="material-symbols-outlined" @click="openGuide()">help</button>
+          <a href="https://github.com/gefeeplay/Calendar" target="_blank"><img src="./assets/github.svg" style="max-height: 24px;"/></a> 
         </div>
       </div>
 
@@ -55,6 +57,7 @@ const curMonth = ref(null);
 const todayEvents = ref([]);
 const today = new Date();
 const formatToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+const guideRef = ref(null)
 
 onMounted(async () => {
   await nextTick() // Ждём, пока всё отрисуется
@@ -120,6 +123,10 @@ function increaseYear() {
 
 function decreaseYear() {
   year.value--;
+}
+
+function openGuide() {
+  guideRef.value?.openGuide()
 }
 </script>
 

@@ -1,7 +1,10 @@
 <template>
     <div class="overlay" v-if="visible">
         <div class="popup">
-            <h2>{{ pages[curPage].title }}</h2>
+            <div class="close_wrapper">
+              <div class="material-symbols-outlined close_btn" @click="closeGuide()">close</div>
+            </div>
+            <h2 style="text-align: center; margin: 0;">{{ pages[curPage].title }}</h2>
             
             <div v-if="curPage === 0">
                 <p>Это веб-версия интерактивного календаря. 
@@ -63,7 +66,7 @@
 </template>
 <script setup>
 
-import {ref, computed, onMounted} from 'vue';
+import {ref, computed, onMounted, defineExpose} from 'vue';
 
 const visible = ref(false);
 const curPage = ref(0);
@@ -101,21 +104,22 @@ function prevPage() {
   }
 }
 
+function openGuide() {
+  visible.value = true;
+  curPage.value = 0;
+}
+
 function closeGuide() {
   visible.value = false;
   localStorage.setItem('wasGuideShown', 'true');
 }
 
-onMounted(() => {
-    visible.value = true;
-});
-/*
-onMounted(() => {
   if (!localStorage.getItem('wasGuideShown')) {
     visible.value = true;
   }
-});
-*/
+
+
+defineExpose({openGuide})
 </script>
 <style scoped>
 .overlay {
@@ -136,8 +140,7 @@ onMounted(() => {
   padding: 24px;
   border-radius: 12px;
   width: 300px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0px 10px rgba(0,0,0,0.2);
 }
 
 
@@ -155,6 +158,7 @@ button {
   border-radius: 6px;
   cursor: pointer;
   width: auto;
+  transition: background-color 0.2s ease;
 }
 
 button:disabled {
@@ -162,13 +166,28 @@ button:disabled {
   cursor: not-allowed;
 }
 
-img {
-    max-height: 1rem;
+button:hover:not(:disabled) {
+  background-color: #6679d1;
 }
 
 .material-symbols-outlined {
     font-size: 16px;
     position: relative;
     top: 5px;
+}
+
+.close_wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.close_btn{
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.close_btn:hover {
+  color: #555; 
 }
 </style>
