@@ -9,12 +9,7 @@
                 </button>
             </div>
             <h3>Новое событие</h3>
-            <input
-            v-model="eventText"
-            type="text"
-            placeholder="Введите событие"
-            required
-            />
+            <input v-model="eventText" type="text" placeholder="Введите событие" required />
             <div class="edit-buttons">
                 <button type="submit" style="color: green;">Сохранить</button>
                 <button type="button" @click="closeDialog">Назад</button>
@@ -62,14 +57,14 @@ defineExpose({ open, closeDialog });
 
 <style scoped>
 dialog {
-  border: none;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #333;
-  width: 300px;
+    border: none;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #333;
+    width: 300px;
 }
 
-.event-modal{
+.event-modal {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,16 +76,16 @@ dialog {
 }
 
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.4);
 }
 
-.edit-buttons{
+.edit-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.edit-buttons button{
+.edit-buttons button {
     min-width: 30%;
     height: 1.8rem;
     border-radius: 0.5rem;

@@ -1,5 +1,5 @@
 <template>
-  <GuidePopup ref="guideRef"/>
+  <GuidePopup ref="guideRef" />
   <!-- Переключение между годом и месяцем -->
   <div class="calendar-wrapper">
     <MonthView v-if="curMonth !== null" :curMonth="curMonth" :year="year" :getMonthDays="getMonthDays"
@@ -14,7 +14,8 @@
         <div>Календарь {{ year }} года</div>
         <div>
           <button class="material-symbols-outlined" @click="openGuide()">help</button>
-          <a href="https://github.com/gefeeplay/Calendar" target="_blank"><img src="./assets/github.svg" style="max-height: 22px;"/></a> 
+          <a href="https://github.com/gefeeplay/Calendar" target="_blank"><img src="./assets/github.svg"
+              style="max-height: 22px;" /></a>
         </div>
       </div>
 
