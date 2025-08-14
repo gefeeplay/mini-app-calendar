@@ -2,6 +2,8 @@ import './assets/main.css'
 import './assets/toast-icons-style.css'
 import 'vue-toastification/dist/index.css'
 
+const tg = window.Telegram.WebApp;
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import Toast, { POSITION } from 'vue-toastification'
